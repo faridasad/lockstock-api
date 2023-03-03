@@ -17,15 +17,25 @@ export const getAllPosts = async (req: Request, res: Response) => {
   }
 };
 
+export const getSinglePost = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+    res.status(200).json({ success: true, data: post });
+  } catch (err: any) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
 export const createPost = async (req: Request, res: Response) => {
   try {
-    const { name, prompt, photo } = req.body;
-    const imageUrl = await cloudinary.v2.uploader.upload(photo);
+    const { name, prompt, image } = req.body;
+    const imageUrl = await cloudinary.v2.uploader.upload(image);
 
     const newPost = await Post.create({
       name,
       prompt,
-      photo: imageUrl.url,
+      image: imageUrl.url,
     });
 
     res.status(201).json({ success: true, data: newPost });
