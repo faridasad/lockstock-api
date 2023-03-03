@@ -22,8 +22,8 @@ export const uploadImage = async (req: Request, res: Response) => {
 
     const image = aiRes.data.data[0].b64_json;
 
-    res.status(200).send({ photo: image });
+    res.status(200).send({ image });
   } catch (error: any) {
-    res.status(500).send(error?.response.data.error.message);
+    res.status(500).send(error);
   }
 };
