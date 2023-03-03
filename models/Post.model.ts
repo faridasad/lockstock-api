@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-export interface Post extends mongoose.Document {
-  title: string;
+export interface PostProps extends mongoose.Document {
+  name: string;
   image: string;
-  description: string;
+  prompt: string;
 }
 
 const PostSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },
@@ -16,7 +16,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    prompt: {
       type: String,
       required: true,
     },
@@ -24,4 +24,4 @@ const PostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<Post>("Post", PostSchema, "posts");
+export default mongoose.model<PostProps>("Post", PostSchema, "posts");
