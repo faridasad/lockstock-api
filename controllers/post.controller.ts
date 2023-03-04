@@ -1,4 +1,4 @@
-import Post from "../models/post.model";
+import Post from "../models/post.modell";
 import cloudinary from "cloudinary";
 import { Request, Response } from "express";
 
