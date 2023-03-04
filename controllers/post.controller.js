@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPost = exports.getSinglePost = exports.getAllPosts = void 0;
-const post_model_1 = __importDefault(require("../models/post.model"));
+const post_modell_1 = __importDefault(require("../models/post.modell"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
 cloudinary_1.default.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -22,7 +22,7 @@ cloudinary_1.default.v2.config({
 });
 const getAllPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const posts = yield post_model_1.default.find();
+        const posts = yield post_modell_1.default.find();
         res.status(200).json({ success: true, data: posts });
     }
     catch (err) {
@@ -33,7 +33,7 @@ exports.getAllPosts = getAllPosts;
 const getSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const post = yield post_model_1.default.findById(id);
+        const post = yield post_modell_1.default.findById(id);
         res.status(200).json({ success: true, data: post });
     }
     catch (err) {
@@ -45,7 +45,7 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const { name, prompt, image } = req.body;
         const imageUrl = yield cloudinary_1.default.v2.uploader.upload(image);
-        const newPost = yield post_model_1.default.create({
+        const newPost = yield post_modell_1.default.create({
             name,
             prompt,
             image: imageUrl.url,
