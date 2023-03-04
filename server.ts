@@ -8,7 +8,7 @@ import postRouter from "./routes/post.route";
 
 const app = express();
 app.use(express.json({limit: '50mb'}));
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use("/api/v1", postRouter);
 
 connectDB(process.env.MONGO_URI!).then(() => {
