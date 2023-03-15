@@ -1,4 +1,4 @@
-import Post from "../models/post.modell";
+import Post from "../models/post.model";
 import cloudinary from "cloudinary";
 import { Request, Response } from "express";
 
@@ -29,17 +29,19 @@ export const getSinglePost = async (req: Request, res: Response) => {
 
 export const createPost = async (req: Request, res: Response) => {
   try {
-    const { name, prompt, image } = req.body;
+    const { name, prompt, image, blurhash } = req.body;
     const imageUrl = await cloudinary.v2.uploader.upload(image);
 
     const newPost = await Post.create({
       name,
       prompt,
       image: imageUrl.url,
+      blurhash,
     });
 
     res.status(201).json({ success: true, data: newPost });
   } catch (err: any) {
     res.status(500).json({ success: false, message: err.message });
+    console.log(err);
   }
 };
