@@ -20,10 +20,10 @@ export const uploadImage = async (req: Request, res: Response) => {
       response_format: "b64_json",
     });
 
-    const image = aiRes.data.data[0].b64_json;
+    const image: string = aiRes.data.data[0].b64_json!;
 
     res.status(200).send({ image });
   } catch (error: any) {
-    res.status(500).send(error);
+    res.status(500).send({ error });
   }
 };
