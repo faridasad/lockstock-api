@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "tsc --p ./",
-    "start": "node server.js",
+    "build": "tsc --p tsconfig.json --outDir dist",
+    "start": "node dist/server.js",
     "dev": "nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
